@@ -1,0 +1,44 @@
+<style>
+  .alert-bar {
+    display: flex; /* Flexbox to align items horizontally */
+    align-items: center;
+    justify-content: center;
+    background-color: #D32F2F; /* Red background */
+    color: white;
+    font-size: 16px;
+    padding: 10px;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    width: 100%;
+  }
+  
+  .flag {
+    width: 40px;
+    height: 25px;
+    background: linear-gradient(to bottom, #1e568f 50%, #c3d128 50%); /* Red and Yellow flag */
+    margin-right: 10px;
+  }
+
+  .text {
+    font-weight: bold;
+    margin-right: 10px;
+    font-family: sans-serif;
+  }
+
+  .close-btn {
+    margin-left: auto;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+  }
+</style>
+
+<div class="alert-bar">
+  <div class="flag"></div>
+  <div class="text">Support Ukraine!</div>
+  <button class="close-btn" onclick="this.parentElement.style.display='none'">×</button>
+</div>

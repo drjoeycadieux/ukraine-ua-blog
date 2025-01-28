@@ -1,0 +1,95 @@
+---
+import { blogPosts } from '../data/blogPosts.js';
+import HeaderAlert from '../components/HeaderAlert.astro';
+
+const title = "Ukraine UA | Blog";
+---
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{title}</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+    header {
+      background-color: #005bbb;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+    nav {
+      margin: 1rem 0;
+    }
+    nav a {
+      margin: 0 1rem;
+      color: white;
+      text-decoration: none;
+    }
+    .content {
+      padding: 2rem;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .post {
+      background-color: white;
+      margin-bottom: 1rem;
+      padding: 1rem;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .post h3 {
+      margin-top: 0;
+    }
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+
+<HeaderAlert />
+
+<header>
+  <h1>{title}</h1>
+</header>
+
+<nav>
+  <a href="/">Home</a>
+  <a href="/about">About</a>
+</nav>
+
+<div class="content">
+  <h2>Latest Blog Posts</h2>
+
+  {blogPosts.map(post => (
+    <div class="post">
+      <h3>{post.title}</h3>
+      <p><strong>{post.date}</strong></p>
+      <p>{post.description}</p>
+    </div>
+  ))}
+
+</div>
+
+<footer>
+  <p>Created with 💙 for Ukraine.</p>
+</footer>
+
+</body>
+</html>
