@@ -1,12 +1,13 @@
 <style>
   .alert-bar {
-    display: flex; /* Flexbox to align items horizontally */
+    display: flex;
     align-items: center;
     justify-content: center;
     background-color: rgb(34, 71, 190);
     color: white;
     font-size: 16px;
     padding: 10px;
+    position: fixed; /* Fix the alert bar at the top */
     top: 0;
     left: 0;
     right: 0;
@@ -14,11 +15,11 @@
     width: 100%;
     margin: auto;
   }
-  
+
   .flag {
     width: 40px;
     height: 25px;
-    background: linear-gradient(to bottom, #1e568f 50%, #c3d128 50%); /* Red and Yellow flag */
+    background: linear-gradient(to bottom, #1e568f 50%, #c3d128 50%);
     margin-right: 10px;
   }
 
@@ -26,6 +27,13 @@
     font-weight: bold;
     margin-right: 10px;
     font-family: sans-serif;
+    text-align: center; /* Ensure text is centered */
+  }
+
+  .donation-link {
+    color: #FFD700; /* Gold color for the link */
+    text-decoration: underline;
+    margin-left: 10px;
   }
 
   .close-btn {
@@ -40,6 +48,9 @@
 
 <div class="alert-bar">
   <div class="flag"></div>
-  <div class="text">Support Ukraine!</div>
+  <div class="text">
+    Support Ukraine! 
+    <a href="https://u24.gov.ua" target="_blank" class="donation-link">Donate Now</a>
+  </div>
   <button class="close-btn" onclick="this.parentElement.style.display='none'">×</button>
 </div>
