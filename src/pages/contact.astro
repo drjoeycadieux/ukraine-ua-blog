@@ -1,0 +1,43 @@
+---
+// Contact.astro
+import ContactForm from '../components/ContactForm.astro';
+---
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - Ukraine Blog</title>
+  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-gray-100 text-gray-900 font-sans">
+
+  <main class="contact-page min-h-screen flex flex-col justify-between">
+    <!-- Navigation Bar -->
+    <nav class="bg-white shadow-md">
+      <div class="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
+        <a href="/" class="text-xl font-semibold text-gray-900">Home</a>
+      </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="contact-header bg-white p-8 shadow-md">
+      <h1 class="text-4xl font-semibold text-center text-gray-900 mb-4">Get in Touch</h1>
+      <p class="text-lg text-center text-gray-600">If you have any questions, feel free to reach out using the form below!</p>
+    </header>
+
+    <!-- Contact Form Section -->
+    <section class="contact-form-section py-12 px-6 bg-gray-50 flex-1">
+      <div class="max-w-3xl mx-auto bg-white p-8 rounded-xl shadow-lg border border-gray-200">
+        <ContactForm />
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="contact-footer bg-gray-200 py-6 text-center">
+      <p class="text-gray-700 text-lg">Thank you for reaching out!</p>
+    </footer>
+  </main>
+
+</body>
+</html>

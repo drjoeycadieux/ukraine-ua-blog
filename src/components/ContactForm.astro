@@ -1,0 +1,67 @@
+---
+// Add any Astro component-specific logic if needed here
+---
+
+<form id="contact-form" method="POST" class="max-w-lg mx-auto p-6 bg-white shadow-lg rounded-lg">
+  <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">Contact Us</h2>
+  
+  <!-- Input Field Template -->
+  <div class="form-group mb-4">
+    <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Name</label>
+    <input type="text" id="name" name="name" required class="input-field" />
+  </div>
+
+  <div class="form-group mb-4">
+    <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+    <input type="email" id="email" name="email" required class="input-field" />
+  </div>
+
+  <div class="form-group mb-4">
+    <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Message</label>
+    <textarea id="message" name="message" required class="input-field" rows="5"></textarea>
+  </div>
+  
+  <button type="submit" class="w-full py-3 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+    Submit
+  </button>
+</form>
+
+<script type="module">
+  const form = document.getElementById('contact-form');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+    const formJSON = Object.fromEntries(formData.entries());
+
+    try {
+      const response = await fetch('<YOUR_FIREBASE_FUNCTION_URL>', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formJSON),
+      });
+
+      if (!response.ok) throw new Error('Form submission failed');
+      
+      alert('Form submitted successfully!');
+      form.reset();
+    } catch (error) {
+      alert('Error submitting form.');
+      console.error(error);
+    }
+  });
+</script>
+
+<style>
+  .input-field {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    focus:outline-none;
+    focus:ring-2;
+    focus:ring-blue-500;
+    focus:border-transparent;
+  }
+</style>
