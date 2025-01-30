@@ -3,6 +3,24 @@ import { blogPosts } from '../data/blogPosts.js';
 import HeaderAlert from '../components/HeaderAlert.astro';
 
 const title = "Ukraine UA | Blog";
+
+// Pagination Settings
+const postsPerPage = 5;
+let currentPage = 1;
+
+// Calculate total pages
+const totalPages = Math.ceil(blogPosts.length / postsPerPage);
+
+// Get the posts for the current page
+const startIndex = (currentPage - 1) * postsPerPage;
+const currentPosts = blogPosts.slice(startIndex, startIndex + postsPerPage);
+
+// Pagination buttons (previous and next)
+function changePage(pageNumber) {
+  if (pageNumber > 0 && pageNumber <= totalPages) {
+    currentPage = pageNumber;
+  }
+}
 ---
 
 <html lang="en">
@@ -10,93 +28,61 @@ const title = "Ukraine UA | Blog";
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{title}</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f4f4f4;
-    }
-    header {
-      background-color: #005bbb;
-      color: white;
-      padding: 1rem;
-      text-align: center;
-    }
-    nav {
-      margin: 1rem 0;
-    }
-    nav a {
-      margin: 0 1rem;
-      color: black;
-      text-decoration: none;
-      font-family: sans-serif;
-      font-weight: bold;
-    }
-
-    nav a:hover {
-      color: lightgray;
-    }
-    .content {
-      padding: 2rem;
-    }
-    h1 {
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
-    }
-    h2 {
-      font-size: 1.5rem;
-      margin-bottom: 0.5rem;
-    }
-    .post {
-      background-color: white;
-      margin-bottom: 1rem;
-      padding: 1rem;
-      border-radius: 5px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-    .post h3 {
-      margin-top: 0;
-    }
-    footer {
-      background-color: #333;
-      color: white;
-      text-align: center;
-      padding: 1rem;
-      margin-top: 2rem;
-    }
-  </style>
+  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
 </head>
-<body>
+<body class="bg-gray-100 font-sans">
 
-<HeaderAlert />
+  <HeaderAlert />
 
-<header>
-  <h1>{title}</h1>
-</header>
+  <header class="bg-blue-600 text-white py-4 text-center">
+    <h1 class="text-3xl font-bold">{title}</h1>
+  </header>
 
-<nav>
-  <a href="/">Home</a> -
-  <a href="/about">About</a>
-</nav>
+  <nav class="my-4 text-center">
+    <a href="/" class="text-lg font-semibold text-gray-900 hover:text-gray-500 mx-4">Home</a>
+    <span class="text-lg text-gray-900">|</span>
+    <a href="/about" class="text-lg font-semibold text-gray-900 hover:text-gray-500 mx-4">About</a>
+    <span class="text-lg text-gray-900">|</span>
+    <a href="/contact" class="text-lg font-semibold text-gray-900 hover:text-gray-500 mx-4">Contact</a>
+  </nav>
 
-<div class="content">
-  <h2>Latest Blog Posts</h2>
+  <div class="content p-6">
+    <h2 class="text-2xl font-semibold mb-6">Latest Blog Posts</h2>
 
-  {blogPosts.map(post => (
-    <div class="post">
-      <h3>{post.title}</h3>
-      <p><strong>{post.date}</strong></p>
-      <p>{post.description}</p>
+    {currentPosts.map(post => (
+      <div class="post bg-white p-6 mb-6 rounded-lg shadow-md">
+        <h3 class="text-xl font-semibold mb-2">{post.title}</h3>
+        <p class="text-sm text-gray-600 mb-2"><strong>{post.date}</strong></p>
+        <p class="text-gray-800">{post.description}</p>
+      </div>
+    ))}
+
+    <div class="pagination flex justify-center mt-6">
+      <button 
+        onClick={() => changePage(currentPage - 1)} 
+        class="px-4 py-2 mx-2 bg-gray-800 text-white rounded hover:bg-gray-700" 
+        disabled={currentPage === 1}
+      >
+        Previous
+      </button>
+
+      <span class="mx-2 text-lg text-gray-900">
+        Page {currentPage} of {totalPages}
+      </span>
+
+      <button 
+        onClick={() => changePage(currentPage + 1)} 
+        class="px-4 py-2 mx-2 bg-gray-800 text-white rounded hover:bg-gray-700" 
+        disabled={currentPage === totalPages}
+      >
+        Next
+      </button>
     </div>
-  ))}
+  </div>
 
-</div>
-
-
-<footer>
-  <p>Created with 💙 for Ukraine.</p>
-</footer>
+  <footer class="bg-gray-800 text-white text-center py-4 mt-8">
+    <p>Created with 💙 for Ukraine.</p>
+  </footer>
 
 </body>
 </html>
